@@ -32,3 +32,6 @@ stack.print();
 
 console.log("removed: ",stack.pop());
 stack.print();
+
+// items not accessible outside stack object
+console.log(stack);
