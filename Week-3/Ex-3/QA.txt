@@ -1,0 +1,6 @@
+Q. What is the output of the following?
+functioncreateIncrement() {letcount=0;functionincrement() {count++;}letmessage=`Count is${count}`;functionlog() {console.log(message);}return[increment,log];}const[increment,log] =createIncrement();increment();increment();increment();log();// What is logged?
+Ans: Output is 0 because message is declared in this context where count is initialized as 0.
+Later, count variable is updated. But, message variable was initialized before with count value 0.
+
+
