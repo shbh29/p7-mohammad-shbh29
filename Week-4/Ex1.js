@@ -2,44 +2,57 @@ function getNumber() {
     return Math.floor(Math.random() * 100);
 }
 
+function getPromise(executionFunction) {
+    'use strict';
+    const that = {};
+    that.thenFunctions = [];
+    that.handleError = (x) => { throw new Error(`catch is must: ${x}`)};
 
-class MyPromise {
-    constructor(executionFunction){
-        this.thenFunctions = [];
-        this.handleError = () => {};
+    // I made an attempt to demonstrate different states of promise,
+    // But, could not print the other states except pending.
+    that.exposedObject = {
+        state: "<pending>"
+    }
 
-        this.resolve = this.resolve.bind(this);
-        this.reject = this.reject.bind(this);
-        setTimeout(() => executionFunction(this.resolve, this.reject), 0);
+    that.exposedObject.then = function(handleResolve) {
+        that.thenFunctions.push(handleResolve);
+        return that.exposedObject;
     }
-    then(handleResolve) {
-        this.thenFunctions.push(handleResolve);
-        
-        return this;
+
+    that.exposedObject.catch = function(handleError) {
+        that.handleError = handleError;
+        return that.exposedObject;
     }
-    resolve(x) {
-        this.thenFunctions.forEach(thenImpl => {
+
+    that.resolve = function(x) {
+        that.exposedObject.state = x;
+        that.thenFunctions.forEach(thenImpl => {
             x = thenImpl(x);
         });
-    }
-    reject(x) {
-        throw new Error(x);
-    }
-    catch(handleError) {
-        this.handleError = handleError;
+    }.bind(that);
 
-        return this;
-    }
+    that.reject = function(x) {
+        that.exposedObject.state = `<rejected> ${x}`;
+        that.handleError(x);
+    }.bind(that);
+
+    // execute separately so that then and catch parameters are initialized.
+    setTimeout(() => executionFunction(that.resolve, that.reject), 0);
+
+    return that.exposedObject;
 }
 
-
-new MyPromise((resolve, reject) => {
+const promise = getPromise((resolve, reject) => {
     let rn = getNumber();
-    if (rn % 5 == 0) { reject(new Error(`promise rejected: ${rn}`));}
+    if (rn % 5 == 0) { reject(rn);}
     else { resolve(rn);}
 }).then((rn) => {
     console.log(`Promise resolved - ${rn}`);
     return Math.floor(rn / 5);
 }).then((rn) => {
     console.log(`second then - ${rn}`);
-}).catch((err) => console.log(err));
+}).catch((err) => {
+    console.log(err);
+});
+
+console.log(promise);
