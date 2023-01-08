@@ -1,3 +1,5 @@
+//SC: O(1)
+//TC: O(n)
 function sort012(arr) {
     let i = 0;
     let iteration = 0;

@@ -1,5 +1,6 @@
 //Buy Sell Stock Problem
-
+// SC: O(1)
+// TC: O(n)
 function getMaxProfit(stockPrices) {
     let maxProfit = 0;
     let minIndex = 0;

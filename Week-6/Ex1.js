@@ -15,5 +15,5 @@ function getMaxSum(arr) {
 
 let arr = [2,4,-10,7,4,-3,2,2];
 // arr = [1,2,3,4,-10];
-
+arr = [-2,-3,4,-1,-2,1,5,-3];
 console.log("max sum from sequence of array is: ",getMaxSum(arr));

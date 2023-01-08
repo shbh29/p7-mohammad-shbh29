@@ -1,3 +1,7 @@
+//SC: O(1)
+//TC: O(mxn) where m is total number of row of array 
+//           and n is total number of column of array.
+
 //spiral order traversal.
 function goSpiral(arr) {
     // I know I need to traverse in one direction at a time.
