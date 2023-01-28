@@ -1,35 +1,10 @@
 // Linked List Reverse Problem
 // TC: O(n)
 // SC: O(1)
-class Node {
-    constructor(data, next) {
-        this.data = data;
-        this.next = next;
-    }
-}
 
-class LinkedList{
-    constructor() {
-        this.head = null;
-    }
-    addNode(newData) {
-        if (this.head == null) { 
-            this.head = new Node(newData, null); 
-            return;
-        }
-        let n = this.head;
-        while (n.next != null) { n = n.next };
-        let newNode = new Node(newData, null);
-        n.next = newNode;
-    }
-    printLinkedList() {
-        let n = this.head;
-        console.log("Linked List Elements are: ");
-        while (n != null) {
-            console.log(n.data, " ");
-            n = n.next;
-        }
-    }
+const LinkedList = require('./LinkedListSkeleton')
+
+class LLReverse extends LinkedList{
     reverseList() {
         if(this.head == null || this.head.next == null) {return;}
         let arr = [];
@@ -50,11 +25,11 @@ class LinkedList{
 
 
 
-let ll = new LinkedList();
-ll.addNode(1);
-ll.addNode(2);
-ll.addNode(3);
-ll.addNode(4);
-ll.printLinkedList();
+let ll = new LLReverse();
+ll.add(1);
+ll.add(2);
+ll.add(3);
+ll.add(4);
+ll.print();
 ll.reverseList();
-ll.printLinkedList();
+ll.print();

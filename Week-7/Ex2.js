@@ -1,34 +1,12 @@
 // Rotate By given number
 // SC : O(1)
 // TC: O(n)
-class Node {
-    constructor(data, next) {
-        this.data = data;
-        this.next = next;
-    }
-}
+const LinkedList = require('./LinkedListSkeleton');
 
-
-class LinkedList {
-    constructor() {
-        this.head = null;
-        this.cnt = 0;
-    }
-    add(newData) {
-        this.cnt++;
-        if (this.head==null) { this.head = new Node(newData, null); }
-        else {
-            let n = this.head;
-            while(n.next != null) {
-                n = n.next;
-            }
-            n.next = new Node(newData, null);
-        }
-
-    }
+class LLRotate extends LinkedList {
     rotateLinkedList(rotateBy) {
-        rotateBy = rotateBy % this.cnt;
-        if (rotateBy > 0 && this.cnt > 0) {
+        rotateBy = rotateBy % this.length;
+        if (rotateBy > 0 && this.length > 0) {
             let i = 1;
             let newHead = this.head.next;
             let newTail = this.head
@@ -52,22 +30,14 @@ class LinkedList {
             console.log("No rotate operations required!")
         }
     }
-    printLinkedList() {
-        console.log("list is: ");
-        let n = this.head;
-        while(n != null) {
-            console.log(n.data);
-            n=n.next;
-        }
-    }
 }
 
-let ll = new LinkedList();
+let ll = new LLRotate();
 ll.add(1);
 ll.add(2);
 ll.add(3);
 ll.add(4);
 
-ll.printLinkedList();
-ll.rotateLinkedList(5);
-ll.printLinkedList();
+ll.print();
+ll.rotateLinkedList(2);
+ll.print();
