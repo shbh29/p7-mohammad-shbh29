@@ -1,4 +1,7 @@
 // paranthesis match
+//TC: O(n)
+//SC: O(1)
+
 const Stack = require('./SkeletonStack.js');
 
 function matchParathesis(expression) {
