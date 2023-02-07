@@ -1,4 +1,6 @@
 // Problem Next Greater Number
+// TC: O(n)
+// SC: O(n) 
 
 const Stack = require("./SkeletonStack");
 
